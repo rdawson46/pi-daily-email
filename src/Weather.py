@@ -12,4 +12,4 @@ def getWeather()->dict:
     else:
         data = response.json()
         return {'Temp': data['current']['temp_f'], 'Humidity': data['current']['humidity'],
-                'condition':data['current']['condition']['text']}
+                'Condition':data['current']['condition']['text']}
