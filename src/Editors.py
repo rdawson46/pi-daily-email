@@ -1,8 +1,14 @@
 import src.Weather as weather
+import src.News as News
 from datetime import date
 
 def prepare():
-    forecast = weather.getWeather()
+    try:
+        forecast = weather.getWeather()
+        news = News.getNews()
+    except:
+        print('Failed to process API Data')
+        exit()
 
     today = date.today()
     today = today.strftime("%B %d, %Y")
@@ -50,30 +56,45 @@ def prepare():
             background-color: aliceblue;
             color: black;
         }
+        #canvas{
+            color: black;
+            background-color: navajowhite;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 2.5%;
+        }
     </style>
 </head>
     """
 
-    body="""
+    body=f"""
 <body>
     <div id="top">
-        <header>Daily Alerts For {date}</header>
+        <header>Daily Alerts For {today}</header>
     </div>
     <div class="group">
         <div class="subGroup" id="weather">
             <h3><u>Weather</u></h3>
             <ul>
-                <li>Current Temperature: {temp}</li>
-                <li>Humidity: {humid}</li>
-                <li>Condition: {condition}</li>
+                <li>Current Temperature: {forecast['Temp']}</li>
+                <li>Humidity: {forecast['Humidity']}</li>
+                <li>Condition: {forecast['Condition']}</li>
             </ul>
         </div>
         <div class="subGroup" id="news">
-            asdfasdfasdfasdf
+            <h3><u>News</u></h3>
+            <ul>
+                <li>{news[0]}</li>
+                <li>{news[1]}</li>
+                <li>{news[2]}</li>
+            </ul>
         </div>
     </div>
+    <div id="canvas">
+        <h3><u>Canvas To Do</u></h3>
+    </div>
 </body>
-    """.format(date=today, temp=forecast['Temp'], humid=forecast['Humidity'], condition=forecast["Condition"])
+    """
 
     with open("page.html", "w") as page:
         page.write(html + body)
