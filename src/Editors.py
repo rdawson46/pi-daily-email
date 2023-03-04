@@ -3,12 +3,12 @@ import src.News as News
 from datetime import date
 
 def prepare():
-    try:
-        forecast = weather.getWeather()
-        news = News.getNews()
-    except:
-        print('Failed to process API Data')
-        exit()
+    forecast = weather.getWeather()
+    news = News.getNews()
+
+    if news == -1 or forecast == -1:
+        print('Failed')
+        return -1
 
     today = date.today()
     today = today.strftime("%B %d, %Y")
@@ -98,3 +98,4 @@ def prepare():
 
     with open("page.html", "w") as page:
         page.write(html + body)
+    return 0
