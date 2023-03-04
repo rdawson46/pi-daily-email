@@ -15,7 +15,7 @@ def send_email(users: list):
 
     # makes message html supporting
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Subject here"
+    msg['Subject'] = "Daily Reminders"
     msg['From'] = "email"
     
 
