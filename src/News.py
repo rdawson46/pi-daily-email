@@ -1,6 +1,7 @@
 from . import keys
 import requests
 
+# returns 3 general news stories
 def getNews()->dict:
     url = 'https://newsapi.org/v2/top-headlines?'
     params = {'country': 'us','apiKey': keys.newsKey}

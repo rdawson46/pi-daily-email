@@ -7,7 +7,6 @@ def prepare():
     news = News.getNews()
 
     if news == -1 or forecast == -1:
-        print('Failed')
         return -1
 
     today = date.today()

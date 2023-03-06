@@ -1,6 +1,7 @@
 from . import keys
 import requests
 
+# returns JSON with temp, humidity, and condition
 def getWeather()->dict:
     url = "http://api.weatherapi.com/v1/current.json"
     params = {"key" : keys.weatherKey, 'q': "State College"}
