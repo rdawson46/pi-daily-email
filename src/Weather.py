@@ -12,8 +12,9 @@ def getWeather()->dict:
         print('Connection to weather API failed')
         return -1
     if response.status_code != 200:
-        print("Error")
-    else:
-        data = response.json()
-        return {'Temp': data['current']['temp_f'], 'Humidity': data['current']['humidity'],
-                'Condition':data['current']['condition']['text']}
+        return response.status_code
+    
+    data = response.json()
+
+    return {'Temp': data['current']['temp_f'], 'Humidity': data['current']['humidity'],
+            'Condition':data['current']['condition']['text']}

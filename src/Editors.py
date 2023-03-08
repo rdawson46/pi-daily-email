@@ -7,7 +7,7 @@ def prepare():
     news = News.getNews()
 
     if news == -1 or forecast == -1:
-        return -1
+        return 1
 
     today = date.today()
     today = today.strftime("%B %d, %Y")
@@ -55,7 +55,7 @@ def prepare():
             background-color: aliceblue;
             color: black;
         }
-        #canvas{
+        #stocks{
             color: black;
             background-color: navajowhite;
             border-radius: 10px;
@@ -89,8 +89,8 @@ def prepare():
             </ul>
         </div>
     </div>
-    <div id="canvas">
-        <h3><u>Canvas To Do</u></h3>
+    <div id="Stocks">
+        <h3><u>Stock Market Updates</u></h3>
     </div>
 </body>
     """

@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     # while True:
     # if datetime.now().hour == 9:
-    # status = Edit.prepare()
+    status = Edit.prepare()
 
     jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
 
