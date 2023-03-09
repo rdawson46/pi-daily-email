@@ -42,7 +42,7 @@ if __name__ == "__main__":
                 print('waiting till tomorrow')
                 sleep(86400)
             else:
-                sleep(3600)
+                sleep(900)
         except:
             break
     jsProcess.join() # insert after while loop
