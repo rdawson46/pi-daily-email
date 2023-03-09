@@ -21,23 +21,26 @@ def sending():
 if __name__ == "__main__":
     ip = socket.gethostbyname(socket.gethostname())
 
-    # while True:
-    # if datetime.now().hour == 9:
-    status = Edit.prepare()
+    while True:
+        try:
+            if datetime.now().hour == 9:
+                status = Edit.prepare()
 
-    jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
+                jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
 
-    if not jsProcess.is_alive():
-        jsProcess.start()
-        print(f'JS server is running on process: {jsProcess.pid}')
-    
-    else:
-        requests.post(f'http:{ip}:8080/', json={'statusCode': status})
+                if not jsProcess.is_alive():
+                    jsProcess.start()
+                    print(f'JS server is running on process: {jsProcess.pid}')
+                
+                else:
+                    requests.post(f'http:{ip}:8080/', json={'statusCode': status})
 
-    if status == 0: 
-        sending()
+                if status == 0: 
+                    sending()
 
-    # sleep(86400)
-    # else:
-    # sleep(3600)
+                sleep(86400)
+            else:
+                sleep(3600)
+        except KeyboardInterrupt:
+            break
     jsProcess.join() # insert after while loop
