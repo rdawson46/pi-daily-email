@@ -27,23 +27,19 @@ def getIP():
 if __name__ == "__main__":
     ip = getIP()
     jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
+    jsProcess.start()
+    print(f'JS server is running on process: {jsProcess.pid}')
+    
+
     while True:
-        try:
-            if not jsProcess.is_alive():
-                jsProcess.start()
-                print(f'JS server is running on process: {jsProcess.pid}')
+        if datetime.now().hour == 9:
+            status = Edit.prepare()
+            requests.post(f'http://{ip}:8080/', json={'statusCode': status})
 
-            if datetime.now().hour == 9:
-                status = Edit.prepare()
+        if status == 0:
+            sending()
 
-                requests.post(f'http:{ip}:8080/', json={'statusCode': status})
-
-                if status == 0: 
-                    sending()
-
-                sleep(86400)
-            else:
-                sleep(3600)
-        except KeyboardInterrupt:
-            break
+            sleep(86400)
+        else:
+            sleep(3600)
     jsProcess.join() # insert after while loop
