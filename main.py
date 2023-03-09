@@ -26,11 +26,9 @@ def getIP():
 
 if __name__ == "__main__":
     ip = getIP()
-
+    jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
     while True:
         try:
-            jsProcess = multiprocessing.Process(target=hosting, args=(status, ip))
-
             if not jsProcess.is_alive():
                 jsProcess.start()
                 print(f'JS server is running on process: {jsProcess.pid}')
