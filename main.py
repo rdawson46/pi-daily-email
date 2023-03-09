@@ -32,14 +32,17 @@ if __name__ == "__main__":
     
 
     while True:
-        if datetime.now().hour == 9:
-            status = Edit.prepare()
-            requests.post(f'http://{ip}:8080/', json={'statusCode': status})
+        try:
+            if datetime.now().hour == 11:
+                status = Edit.prepare()
+                requests.post(f'http://{ip}:8080/', json={'statusCode': status})
 
-        if status == 0:
-            sending()
-
-            sleep(86400)
-        else:
-            sleep(3600)
+            if status == 0:
+                sending()
+                print('waiting till tomorrow')
+                sleep(86400)
+            else:
+                sleep(3600)
+        except:
+            break
     jsProcess.join() # insert after while loop
