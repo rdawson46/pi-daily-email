@@ -16,10 +16,16 @@ def hosting(code, ipAddr):
 
 def sending():
     SendEmail.send_email(["dawson4623@gmail.com"])
-    
+
+def getIP():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('10.0.0.0', 0))
+    ipAddr = s.getsockname()[0]
+    s.close()
+    return ipAddr
 
 if __name__ == "__main__":
-    ip = socket.gethostbyname(socket.gethostname())
+    ip = getIP()
 
     while True:
         try:
